@@ -1,0 +1,77 @@
+.batafsil {
+  margin-top: 200px;
+  padding-bottom: 100px;
+  .batafsil-title {
+    font-family: "Noto Sans";
+    font-weight: bold;
+    font-size: 28px;
+    line-height: 38px;
+    color: #2c2b5e;
+    padding-bottom: 40px;
+  }
+  .batafsil-list {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    list-style-type: none;
+    padding: 0;
+    padding-bottom: 50px;
+    .batafsil-item {
+      width: 400px;
+      padding-bottom: 30px;
+      .batafsil-blur {
+        margin: 0;
+        padding-bottom: 5px;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 22px;
+        color: #747474;
+      }
+      .batafsil-text {
+        margin: 0;
+        font-weight: 600;
+        font-size: 20px;
+        line-height: 27px;
+        color: #131232;
+      }
+    }
+  }
+  .batafsil-murojaat-matni {
+    margin: 0;
+    padding-bottom: 5px;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 22px;
+    color: #747474;
+  }
+  .batafsil-murojaat-text {
+    max-width: 860px;
+    margin: 0;
+    padding-bottom: 60px;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 25px;
+    color: #131232;
+  }
+  .batafsil-murojaat-ans-title {
+    font-family: "Noto Sans";
+    margin: 0;
+    padding-bottom: 40px;
+    font-weight: bold;
+    font-size: 28px;
+    line-height: 38px;
+    color: #2c2b5e;
+  }
+  .batafsil-murojaat-birik {
+    margin: 0;
+    padding-bottom: 5px;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 22px;
+    color: #747474;
+  }
+  a{
+    display: block;
+  }
+}

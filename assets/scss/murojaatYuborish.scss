@@ -1,0 +1,155 @@
+.murojaatYuborish {
+  margin-top: 200px;
+  .breadcrumbs-list {
+    display: flex;
+    align-items: center;
+    padding-bottom: 60px;
+    .breadcrumbs-item {
+      margin: 0;
+      padding-right: 20px;
+      font-family: "Noto Sans", "Arial", sans-serif;
+      font-weight: bold;
+      font-size: 28px;
+      line-height: 38px;
+      color: #2c2b5e;
+    }
+  }
+  .form-wrapper{
+    display: flex;
+    justify-content: space-between;
+  }
+  .murojaat-form {
+    max-width: 720px;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 100px;
+    margin-right: 10px;
+    .murojaat-form-title {
+      margin: 0;
+      padding-bottom: 20px;
+      font-family: "Noto Sans";
+      font-weight: 600;
+      font-size: 18px;
+      line-height: 25px;
+      color: #131232;
+    }
+    .murojaat-form-textarea {
+      padding: 20px;
+      margin-bottom: 40px;
+      background: #f9f9f9;
+      border: 1px solid #e8e8e8;
+      border-radius: 6px;
+    }
+    .murojaat-form-fayl {
+      display: flex;
+      align-items: center;
+      margin-bottom: 40px;
+      .murojaat-form-fayl-btn {
+        display: flex;
+        align-items: center;
+        padding: 10px 30px;
+        margin-right: 20px;
+        border: 1px solid #0038c7;
+        border-radius: 5px;
+        color: #0038c7;
+        background-color: #fff;
+        img {
+          padding-right: 10px;
+        }
+        p {
+          margin: 0;
+          color: #0038c7;
+        }
+      }
+      p {
+        margin: 0;
+        font-weight: normal;
+        font-size: 18px;
+        line-height: 25px;
+        color: #222;
+      }
+    }
+    .murojaat-form-btn {
+      padding: 20px 45px;
+      color: #fff;
+      background: linear-gradient(337.23deg, #4d49ff 16.07%, #2a97fc 84.76%);
+      border-radius: 14px;
+      border: none;
+      justify-self: flex-end;
+      align-self: flex-end;
+    }
+  }
+
+}
+
+@media screen and (max-width: 1220px){
+  .murojaatYuborish {
+    .form-wrapper{
+      justify-content: center;
+    }
+
+  }
+
+  .murojaatYuborish-right .murojaatYuborish-right-img{
+    display: none;
+  }
+}
+@media screen and (max-width: 700px){
+  .murojaatYuborish {
+    .breadcrumbs-list{
+      align-items: flex-start;
+      .breadcrumbs-item{
+        font-size: 25px;
+      }
+    }
+    .murojaat-form 
+    .murojaat-form-textarea{
+      width: 480px;
+    }
+  }
+}
+@media screen and (max-width: 500px){
+  .murojaatYuborish{
+    .breadcrumbs-list{
+      align-items: flex-start;
+      .breadcrumbs-item{
+        font-size: 20px;
+      }
+    }
+    .murojaat-form 
+    .murojaat-form-textarea{
+      width: 400px;
+    }
+  }
+}
+@media screen and (max-width: 400px){
+  .murojaatYuborish{
+    .breadcrumbs-list{
+      align-items: flex-start;
+      .breadcrumbs-item{
+        font-size: 16px;
+        line-height: 28px;
+      }
+    }
+    .murojaat-form{
+      .murojaat-form-title{
+        font-size: 16px;
+      }
+      .murojaat-form-textarea{
+        width: 300px;
+      }
+      .murojaat-form-fayl {
+        .murojaat-form-fayl-btn{
+          padding: 10px 15px;
+        }
+        p{
+          font-size: 16px;
+        }
+      }
+      .murojaat-form-btn{
+        padding: 10px 25px;
+      }
+    }
+
+  }
+}

@@ -1,0 +1,182 @@
+.murojaat {
+  margin-top: 200px;
+  .murojaat-text {
+    margin: 0;
+    padding-bottom: 40px;
+    font-family: "Noto Sans", "Open Sans", sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 28px;
+    line-height: 38px;
+    color: #2c2b5e;
+  }
+  .murojaat-user-list {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    list-style-type: none;
+    padding: 0;
+    padding-bottom: 100px;
+    .murojaat-user-item {
+      width: 400px;
+      padding-bottom: 30px;
+      .murojaat-user-blur {
+        margin: 0;
+        padding-bottom: 5px;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 22px;
+        color: #747474;
+      }
+      .murojaat-user-text {
+        margin: 0;
+        font-weight: 600;
+        font-size: 20px;
+        line-height: 27px;
+        color: #131232;
+      }
+    }
+  }
+  .user-murojaats {
+    .card {
+      border: none;
+      .card-header {
+        background-color: #fff;
+        border: none;
+        .nav-pills .nav-link {
+          padding: 15px 50px;
+          border: 1px solid #3fa3ff;
+          font-weight: 600;
+          font-size: 18px;
+          line-height: 25px;
+          margin-right: 30px;
+          border-radius: 30px;
+        }
+        .active {
+          background: linear-gradient(
+            315.27deg,
+            #638fff 25.23%,
+            #3fa3ff 75.18%
+          );
+        }
+      }
+    }
+    table{
+      width: 100%;
+      margin-bottom: 100px;
+    }
+    tr {
+      // padding: 28px;
+      border-radius: 20px;
+      th {
+        padding: 28px;
+        background: #f9f9f9;
+        margin-bottom: 20px;
+      }
+      td {
+        padding: 28px;
+        background: #f9f9f9;
+        .batafsil-link {
+          border: none;
+          color: #fff;
+          padding: 10px 30px;
+          background: linear-gradient(315.27deg, #638FFF 25.23%, #3FA3FF 75.18%);
+          border-radius: 10px;
+        }
+        .batafsil-link-active{
+          background: linear-gradient(
+            337.23deg,
+            #4d49ff 16.07%,
+            #2a97fc 84.76%
+          );
+        }
+      }
+      .murojaat-signal{
+        display: flex;
+        align-items: center;
+        span {
+          display: block;
+          width: 15px;
+          height: 15px;
+          border-radius: 30px;
+          margin-right: 10px;
+        }
+        .murojaat-signal-yellow{
+          background-color: yellow;
+        }
+        .murojaat-signal-blue{
+          background-color: #0095E9;
+        }
+        .murojaat-signal-green{
+          background-color: #23B000;
+        }
+        p{
+          margin: 0;
+        }
+      }
+    }
+    .murojaat-first-row{
+      // margin-bottom: 20px;
+    }
+  }
+}
+
+@media screen and (max-width: 830px){
+  .murojaat {
+    .murojaat-user-list .murojaat-user-item{
+      width: 300px;
+    }
+    .user-murojaats tr {
+      .murojaat-signal span{
+        width: 10px;
+        height: 10px;
+      }
+      th{
+        padding: 10px;
+        font-size: 12px;
+      }
+      td{
+        padding: 10px;
+        font-size: 12px;
+
+      }
+    }    
+  }
+}
+@media screen and (max-width: 500px){
+  .murojaat {
+    .user-murojaats tr {
+      th{
+        padding: 8px;
+        font-size: 10px;
+      }
+      td{
+        padding: 8px;
+        font-size: 10px;
+        .batafsil-link{
+          padding: 10px 15px;
+        }
+      }
+      
+    }    
+  }
+}
+@media screen and (max-width: 380px){
+  .murojaat {
+    .user-murojaats tr {
+      th{
+        padding: 5px;
+        font-size: 9px;
+      }
+      td{
+        padding: 5px;
+        font-size: 9px;
+        .batafsil-link{
+          padding: 8px 10px;
+        }
+      }
+      
+    }    
+  }
+}

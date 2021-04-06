@@ -1,0 +1,22 @@
+// :root {
+//   --color: linear-gradient(90.26deg, #B5C9FF 0%, #9FD1FF 99.43%);
+//   --color-primary: linear-gradient(337.23deg, #4D49FF 16.07%, #2A97FC 84.76%);
+//   --color-secondary: linear-gradient(315.27deg, #638FFF 25.23%, #3FA3FF 75.18%);;
+//   --bg: #F9F9F9;;
+//   --bg-secondary: #fff;
+//   --border-color: #ddd;
+// }
+$base-color: #020057;
+$bg-color: linear-gradient(90.26deg, #b5c9ff 0%, #9fd1ff 99.43%);
+*{
+  font-family: 'Open Sans', 'Noto Sans', sans-serif;
+}
+
+@import "components/footer";
+@import "components/navbar";
+@import "fonts";
+@import "landing";
+@import "murojaat";
+@import "murojaatYuborish";
+@import "batafsil";
+

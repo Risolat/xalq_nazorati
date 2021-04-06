@@ -1,0 +1,310 @@
+.container {
+  max-width: 1290px;
+  margin: 0 auto;
+}
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 100px;
+  padding-top: 120px;
+  padding-bottom: 150px;
+  .hero-left {
+    .hero-left__title {
+      max-width: 580px;
+      margin: 0;
+      padding-bottom: 30px;
+      font-family: "Noto Sans", "Open Sans", sans-serif;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 80px;
+      line-height: 109px;
+      color: $base-color;
+    }
+    .hero-left__text {
+      max-width: 520px;
+      margin: 0;
+      padding-bottom: 50px;
+      font-weight: normal;
+      font-size: 24px;
+      line-height: 130%;
+      color: #131232;
+    }
+    .hero-left__btn {
+      padding: 20px 45px;
+      font-weight: normal;
+      font-size: 24px;
+      line-height: 33px;
+      color: #ffffff;
+      background: linear-gradient(337.23deg, #4d49ff 16.07%, #2a97fc 84.76%);
+      border-radius: 14px;
+    }
+  }
+}
+.stats {
+  padding-bottom: 180px;
+  .stats__list {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    .stats__item {
+      display: flex;
+      flex-direction: column;
+      padding-bottom: 20px;
+      p {
+        padding-top: 30px;
+        margin: 0;
+      }
+      .stats__img-wrapper {
+        display: flex;
+        align-items: center;
+        height: 150px;
+        .stats__num {
+          margin-left: 20px;
+          font-weight: normal;
+          font-size: 72px;
+          line-height: 98px;
+          color: #638fff;
+        }
+      }
+      .stats__text {
+        display: flex;
+        justify-content: center;
+        margin: 0;
+        font-family: "Noto Sans", "Open Sans", sans-serif;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 24px;
+        line-height: 33px;
+        color: #131232;
+      }
+    }
+  }
+}
+.issues {
+  background-color: #F9F9F9;
+  padding-bottom: 60px;
+  .issues__text {
+    margin: 0;
+    padding-bottom: 30px;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 25px;
+    color: #131232;
+  }
+  .issues__container {
+    display: flex;
+    align-items: flex-start;
+    .issues__name {
+      .issues__select {
+        display: flex;
+        margin-right: 30px;
+        border-radius: 10px;
+        padding-bottom: 10px;
+        .issues__select-text {
+          width: 360px;
+          margin: 0;
+          padding: 21px 30px;
+          border: 1px solid #3fa3ff;
+          border-top-left-radius: 10px;
+          border-bottom-left-radius: 10px;
+          font-weight: 600;
+          font-size: 20px;
+          line-height: 27px;
+          color: #131232;
+        }
+        img {
+          padding: 21px 25px;
+          background: linear-gradient(
+            315.27deg,
+            #638fff 25.23%,
+            #3fa3ff 75.18%
+          );
+          border-radius: 0px 10px 10px 0px;
+        }
+      }
+      .issues__other {
+        width: 420px;
+        height: 250px;
+        border: 1px solid #638fff;
+        border-radius: 10px;
+        overflow: auto;
+        .issues__other-link {
+          display: block;
+          padding: 25px;
+          font-weight: 600;
+          font-size: 20px;
+          line-height: 27px;
+          color: #131232;
+        }
+      }
+    }
+    .issues__list {
+      width: 880px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+      .issues__item {
+        width: 400px;
+        padding-bottom: 30px;
+        .issues__link {
+          font-weight: normal;
+          font-size: 18px;
+          line-height: 25px;
+          color: #131232;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1170px){
+  .hero-right{
+    img{
+      width: 490px;
+      height: 450px;
+    }
+  }
+} 
+
+@media screen and (max-width: 930px){
+  .hero{
+    .hero-left{
+      .hero-left__title{
+        line-height: 70px;
+        font-size: 70px;
+      }
+      .hero-left__text{
+        font-size: 22px;
+      }
+      .hero-left__btn{
+        font-size: 22px;
+      }
+    }
+    .hero-right{
+      img{
+        width: 440px;
+        height: 400px;
+      }
+    }
+  }
+  .stats{
+    .stats__list{
+      justify-content: center;
+      .stats__item{
+        width: 300px;
+        padding: 0 10px 20px;
+        margin: 0 40px;
+      }
+    }
+  }
+
+  .issues {
+    .issues__text{
+      text-align: center;
+    }
+    .issues__container{
+      flex-wrap: wrap;
+      justify-content: center;
+      .issues__other{
+        margin-bottom: 20px;
+      }
+      .issues__list {
+        justify-content: center;
+        .issues__item{
+          max-width: 370px;
+        }
+      }
+    }
+  }
+
+
+
+
+}
+@media screen and (max-width: 830px){
+  .hero{
+    padding: 120px 30px 150px;
+    .hero-left{
+      .hero-left__title{
+        line-height: 60px;
+        font-size: 60px;
+      }
+      .hero-left__text{
+        font-size: 20px;
+      }
+      .hero-left__btn{
+        padding: 15px 25px;
+        font-size: 20px;
+      }
+    }
+    .hero-right{
+      img{
+        display: none;
+        width: 400px;
+        height: 360px;
+      }
+    }
+  }
+}
+@media screen and (max-width: 480px){
+  .issues .issues__container {
+    .issues__name {
+      padding-left: 10px;
+      .issues__select .issues__select-text{
+        width: 320px;
+      }
+      .issues__other{
+        width: 380px;
+      }
+    }
+    .issues__list {
+      .issues__item{
+        max-width: 350px;
+      }
+    }
+  }
+ 
+
+}
+@media screen and (max-width: 420px){
+  .stats{
+    .stats__list{
+      .stats__item{
+        width: 325px;
+        padding: 0 10px 20px;
+        margin: 0 40px 10px;
+        .stats__img-wrapper{
+          img{
+            width: 180px;
+          }
+        }
+      }
+    }
+  }
+  .issues .issues__container {
+    .issues__name {
+      .issues__select{
+        margin-right: 0;
+        .issues__select-text{
+          width: 250px;
+        }
+      } 
+      .issues__other{
+        width: 310px;
+      }
+    }
+    .issues__list {
+      .issues__item{
+        max-width: 300px;
+      }
+    }
+  }
+}
