@@ -13,7 +13,7 @@
           <img
             class="navbar-flag"
             src="~/assets/img/flag.svg"
-            alt="gerb"
+            alt="flag"
             height="70"
           />
           <p class="navbar-title">
