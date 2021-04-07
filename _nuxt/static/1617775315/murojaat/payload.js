@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/murojaat", {data:[{}],fetch:{},mutations:void 0});
