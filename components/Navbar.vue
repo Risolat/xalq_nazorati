@@ -5,14 +5,14 @@
         <div class="logo">
           <img
             class="navbar-gerb"
-            src="../assets/img/gerb.svg"
+            src="~/assets/img/gerb.svg"
             alt="gerb"
             width="87"
             height="70"
           />
           <img
             class="navbar-flag"
-            src="../assets/img/flag.svg"
+            src="~/assets/img/flag.svg"
             alt="gerb"
             height="70"
           />
@@ -30,7 +30,7 @@
           <b-navbar-nav class="ml-auto">
             <b-nav-item href="#">
               <div class="nav-call-center">
-                <img src="../assets/img/call.svg" alt="call" />
+                <img src="~/assets/img/call.svg" alt="call" />
                 <div class="nav-call">
                   <p>Call center</p>
                   <p class="call-center-num">1144</p>
@@ -38,7 +38,7 @@
               </div>
             </b-nav-item>
             <b-nav-item>
-              <img src="../assets/img/eyess.svg" class="navbar-eye" alt="eye" />
+              <img src="~/assets/img/eyess.svg" class="navbar-eye" alt="eye" />
             </b-nav-item>
             <b-nav-item-dropdown text="O'Z" right>
               <b-dropdown-item href="#">EN</b-dropdown-item>
