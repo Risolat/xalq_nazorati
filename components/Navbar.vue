@@ -5,14 +5,14 @@
         <div class="logo">
           <img
             class="navbar-gerb"
-            src="~/assets/img/gerb.svg"
+            src="../assets/img/gerb.svg"
             alt="gerb"
             width="87"
             height="70"
           />
           <img
             class="navbar-flag"
-            src="~/assets/img/flag.svg"
+            src="../assets/img/flag.svg"
             alt="gerb"
             height="70"
           />
