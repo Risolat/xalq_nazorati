@@ -31,13 +31,35 @@ export default {
   components: true,
 
   // Modules for dev and build (recommended) (https://go.nuxtjs.dev/config-modules)
-  buildModules: ['@nuxtjs/color-mode'],
+  buildModules: [
+    '@nuxtjs/color-mode',
+    '@nuxtjs/vuetify'
+  ],
 
   // Modules (https://go.nuxtjs.dev/config-modules)
   modules: [
     // https://go.nuxtjs.dev/bootstrap
     'bootstrap-vue/nuxt',
+    '@nuxtjs/axios',
+    "@nuxtjs/auth",
+    // "@nuxtjs/auth-next"
+
   ],
+  axios: {
+    baseURL: 'https://xn.technocorp.uz/api',
+
+  },
+
+  auth: {
+    strategies: {
+      local: {
+        endpoints: {
+          login: { url: '/login', method: 'post', propertyName: 'access' },
+          logout: false     
+        }   
+      }
+    },
+  },  
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {

@@ -46,8 +46,8 @@
         </li>
         <li class="batafsil-item">
           <p class="batafsil-blur">Biriktirilgan fayllar</p>
-          <a href="#">Foto223224231.jpg</a>
-          <a href="#">Document_new.pdf</a>
+          <a href="#" download>Foto223224231.jpg</a>
+          <a href="#" download>Document_new.pdf</a>
         </li>
       </ul>
       <p class="batafsil-murojaat-matni">Murojaat matni</p>
@@ -75,8 +75,8 @@
         Luctus tellus eget aliquam eget.
       </p>
       <p class="batafsil-murojaat-birik">Biriktirilgan fayllar</p>
-      <a href="#">Foto223224231.jpg</a>
-      <a href="#">Document_new.pdf</a>
+      <a href="#" download>Foto223224231.jpg</a>
+      <a href="#" download>Document_new.pdf</a>
     </div>
   </div>
 </template>

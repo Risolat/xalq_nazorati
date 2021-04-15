@@ -5,37 +5,52 @@
       <div class="issues__container">
         <div class="issues__name">
           <div class="issues__select">
-            <p class="issues__select-text">Ma’lumotlar uzatish tizimlari</p>
-            <img src="../assets/img/select.svg" alt="select" />
-          </div>
-          <div class="issues__other">
-            <nuxt-link to="/" class="issues__other-link"
-              >Mobil aloqa xizmatlari sifati</nuxt-link
+            <div
+              class="select-wrapper"
+              @click="areOptionsVisible = !areOptionsVisible"
             >
-            <nuxt-link to="/" class="issues__other-link"
-              >Mahalliy telefon xizmatlari</nuxt-link
-            >
-            <nuxt-link to="/" class="issues__other-link"
-              >Ma’lumotlar uzatish tizimlari
-            </nuxt-link>
-            <nuxt-link to="/" class="issues__other-link"
-              >Pochta va matbuot xizmati</nuxt-link
-            >
+              <p class="select">
+                {{ selected }}
+              </p>
+              <img src="../assets/img/select.svg" alt="select" />
+            </div>
+
+            <div class="options" v-if="areOptionsVisible">
+              <p
+                class="option-text"
+                v-for="issue in issues"
+                :key="issue.id"
+                :value="issue.name.oz"
+                @click="selectOption(issue)"
+              >
+                {{ issue.name.uz }}
+              </p>
+            </div>
           </div>
         </div>
-        <!-- <select name="issues" class="issues__select">
-        <option value="2" class="issues__option">Mobil aloqa xizmatlari sifati</option>
-        <option value="2" class="issues__option">Mahalliy telefon xizmatlari</option>
-        <option value="2" class="issues__option" selected>Ma’lumotlar uzatish tizimlari</option>
-        <option value="2" class="issues__option">Pochta va matbuot xizmati</option>
-      </select> -->
         <ul class="issues__list">
-          <li class="issues__item">
-            <nuxt-link class="issues__link" to="/"
-              >Internet va IPTV xizmatiga ulanish bo'yicha</nuxt-link
+          <li
+            v-show="subIssue"
+            class="issues__item"
+            v-for="item in defaultSubIssues"
+            :key="item.id"
+          >
+            <nuxt-link
+              class="issues__link"
+              :to="'/murojaatYuborish/' + item.id"
+              
+              >{{ item.name.uz }}</nuxt-link
             >
           </li>
-          <li class="issues__item">
+          <li class="issues__item" v-for="item in subIssues" :key="item.id">
+            <nuxt-link
+              class="issues__link"
+              :to="'/murojaatYuborish/' + item.id"
+              
+              >{{ item.name.uz }}</nuxt-link
+            >
+          </li>
+          <!-- <li class="issues__item">
             <nuxt-link class="issues__link" to="/"
               >Internet tezligi yomonligi sababli</nuxt-link
             >
@@ -60,41 +75,87 @@
             <nuxt-link class="issues__link" to="/"
               >Internet xizmati va IPTV tufayli ishlamayapti</nuxt-link
             >
-          </li>
+          </li> -->
         </ul>
       </div>
-      <!-- <div class="issues__other">
-      <nuxt-link to="/" class="issues__other-link"
-        >Mobil aloqa xizmatlari sifati</nuxt-link
-      >
-      <nuxt-link to="/" class="issues__other-link"
-        >Mahalliy telefon xizmatlari</nuxt-link
-      >
-      <nuxt-link to="/" class="issues__other-link"
-        >Ma’lumotlar uzatish tizimlari
-      </nuxt-link>
-      <nuxt-link to="/" class="issues__other-link"
-        >Pochta va matbuot xizmati</nuxt-link
-      >
-    </div> -->
     </div>
   </div>
 </template>
 
 <script>
 export default {
+  props:{
+    referenceId:{
+      type: String,
+      default: ''
+    }
+  },
   data() {
     return {
-      selected: null,
-      options: [
-        { value: null, text: "Ma’lumotlar uzatish tizimlari " },
-        { value: "a", text: "Mobil aloqa xizmatlari sifati" },
-        { value: "b", text: "Mahalliy telefon xizmatlari" },
-        { value: "c", text: "Pochta va matbuot xizmati" }
-      ]
+      areOptionsVisible: false,
+      selected: "Ma’lumotlar uzatish tizimlari",
+      headers: {
+        "web-app-key": "xnazorat-79d1d41ae76d9543d29fca7270fbe69a-web"
+      },
+      issues: [],
+      issueId: "",
+      subIssues: [],
+      subIssue: true,
+      defaultSubIssues: [],
+      referenceId: 0
     };
+  },
+  methods: {
+    async getIssuesChild() {
+      await this.$axios(`/references/3/children`, { headers: this.headers })
+        .then(res => {
+          console.log("asdf", res);
+          this.defaultSubIssues = res.data;
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+    async selectOption(issue) {
+      this.areOptionsVisible = false;
+      this.selected = issue.name.oz;
+      this.referenceId = issue.id;
+      console.log('qwerty', this.referenceId);
+      await this.$axios(`/references/${this.referenceId}/children`, { headers: this.headers })
+        .then(res => {
+          console.log(res);
+          this.subIssues = res.data;
+          this.subIssue = !this.subIssue;
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+    hideSelect() {
+      this.areOptionsVisible = false;
+    },
+    async getIssues() {
+      await this.$axios("/references", { headers: this.headers })
+        .then(res => {
+          this.issues = res.data;
+          console.log(this.issues);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
+  },
+  created() {
+    this.getIssues();
+    this.getIssuesChild();
+  },
+  mounted() {
+    document.addEventListener("click", this.hideSelect.bind(this), true);
+  },
+  beforeDestroy() {
+    document.removeEventListener("click", this.hideSelect);
   }
 };
 </script>
 
-<style></style>
+<style scoped></style>

@@ -2,7 +2,7 @@
   <div>
     <div class="container">
       <b-navbar fixed="top" toggleable="lg" type="dark" variant="info">
-        <div class="logo">
+        <nuxt-link to="/" class="logo">
           <img
             class="navbar-gerb"
             src="~/assets/img/gerb.svg"
@@ -13,14 +13,14 @@
           <img
             class="navbar-flag"
             src="~/assets/img/flag.svg"
-            alt="flag"
+            alt="gerb"
             height="70"
           />
           <p class="navbar-title">
             O‘zbekiston Respublikasi Axborotlashtirish va telekommunikatsiyalar
             sohasida nazorat bo‘yicha davlat inspeksiyasi
           </p>
-        </div>
+        </nuxt-link>
         <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
         <b-collapse id="nav-collapse" is-nav>
@@ -45,7 +45,7 @@
               <b-dropdown-item href="#">ES</b-dropdown-item>
             </b-nav-item-dropdown>
             <b-nav-item>
-              <nuxt-link class="navbar-button" to="/">kirish</nuxt-link>
+              <nuxt-link to="/login" class="navbar-button" >kirish</nuxt-link>
             </b-nav-item>
             <!-- <b-nav-item-dropdown right>
               <template #button-content>
@@ -69,6 +69,16 @@ export default {
       type: String,
       default: null
     }
+  },
+  data(){
+    return{
+      headers: {
+        "web-app-key": "xnazorat-79d1d41ae76d9543d29fca7270fbe69a-web"
+      },
+    }
+  },
+  methods: {
+    
   }
 };
 </script>

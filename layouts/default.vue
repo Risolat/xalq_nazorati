@@ -12,7 +12,7 @@ import NavbarMain from '../components/NavbarMain';
 import Footer from '../components/Footer';
 
 export default {
-   components: { Navbar, Footer }
+   components: { Navbar, Footer, NavbarMain }
 }
 </script>
 <style>
