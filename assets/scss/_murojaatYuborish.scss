@@ -14,7 +14,7 @@
       color: #2c2b5e;
     }
   }
-  .form-wrapper{
+  .form-wrapper {
     display: flex;
     justify-content: space-between;
   }
@@ -33,35 +33,39 @@
       line-height: 25px;
       color: #131232;
     }
-    .selectWrapper{
+    .selectWrapper {
       display: flex;
       align-items: center;
-      justify-content: flex-start;
+      justify-content: space-between;
       flex-wrap: wrap;
-      padding-bottom: 20px;
+      // padding-bottom: 20px;
       .selectors{
-        margin-right: 20px;
-        .select-wrapper{
+        margin-bottom: 20px;
+        .select-wrapper {
           display: flex;
           align-items: center;
           width: 300px;
           padding: 20px 15px;
           border: 1px solid #222;
-          p{
-           
-          }
         }
       }
-      p{
+      .selectors:nth-child(1) {
+        margin-right: 20px;
+        
+      }
+      p {
         margin: 0;
         padding-bottom: 5px;
         font-weight: 600;
-      font-size: 18px;
-      line-height: 25px;
+        font-size: 18px;
+        line-height: 25px;
       }
-      .custom-select{
+      .custom-select {
         width: 300px;
       }
+    }
+    .selectors{
+      margin-bottom: 20px;
     }
     .murojaat-form-textarea {
       padding: 20px;
@@ -71,10 +75,13 @@
       border-radius: 6px;
     }
     .murojaat-form-fayl {
-      display: flex;
-      align-items: center;
       margin-bottom: 40px;
-      .input{
+      .murojaat-fayl-actions {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+      .input {
         display: none;
       }
       label {
@@ -105,6 +112,20 @@
         line-height: 25px;
         color: #222;
       }
+      .sended-files{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
+    .send-file-btn{
+      padding: 15px;
+      margin-bottom: 10px;
+      border-radius: 10px;
+      color: #222;
+      background: linear-gradient(
+        90.26deg
+        , #b5c9ff 0%, #9fd1ff 99.43%);
     }
     .murojaat-form-btn {
       padding: 20px 45px;
@@ -116,77 +137,72 @@
       align-self: flex-end;
     }
   }
-
 }
 
-@media screen and (max-width: 1220px){
+@media screen and (max-width: 1220px) {
   .murojaatYuborish {
-    .form-wrapper{
+    .form-wrapper {
       justify-content: center;
     }
-
   }
 
-  .murojaatYuborish-right .murojaatYuborish-right-img{
+  .murojaatYuborish-right .murojaatYuborish-right-img {
     display: none;
   }
 }
-@media screen and (max-width: 700px){
+@media screen and (max-width: 700px) {
   .murojaatYuborish {
-    .breadcrumbs-list{
+    .breadcrumbs-list {
       align-items: flex-start;
-      .breadcrumbs-item{
+      .breadcrumbs-item {
         font-size: 25px;
       }
     }
-    .murojaat-form 
-    .murojaat-form-textarea{
+    .murojaat-form .murojaat-form-textarea {
       width: 480px;
     }
   }
 }
-@media screen and (max-width: 500px){
-  .murojaatYuborish{
-    .breadcrumbs-list{
+@media screen and (max-width: 500px) {
+  .murojaatYuborish {
+    .breadcrumbs-list {
       align-items: flex-start;
-      .breadcrumbs-item{
+      .breadcrumbs-item {
         font-size: 20px;
       }
     }
-    .murojaat-form 
-    .murojaat-form-textarea{
+    .murojaat-form .murojaat-form-textarea {
       width: 400px;
     }
   }
 }
-@media screen and (max-width: 400px){
-  .murojaatYuborish{
-    .breadcrumbs-list{
+@media screen and (max-width: 400px) {
+  .murojaatYuborish {
+    .breadcrumbs-list {
       align-items: flex-start;
-      .breadcrumbs-item{
+      .breadcrumbs-item {
         font-size: 16px;
         line-height: 28px;
       }
     }
-    .murojaat-form{
-      .murojaat-form-title{
+    .murojaat-form {
+      .murojaat-form-title {
         font-size: 16px;
       }
-      .murojaat-form-textarea{
+      .murojaat-form-textarea {
         width: 300px;
       }
       .murojaat-form-fayl {
-        .murojaat-form-fayl-btn{
+        .murojaat-form-fayl-btn {
           padding: 10px 15px;
         }
-        p{
+        p {
           font-size: 16px;
         }
       }
-      .murojaat-form-btn{
+      .murojaat-form-btn {
         padding: 10px 25px;
       }
     }
-
   }
 }

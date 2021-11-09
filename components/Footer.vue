@@ -10,14 +10,12 @@
               <h3>Xalq Nazorati</h3>
             </div>
             <p>
-              O‘zbekiston Respublikasi Axborotlashtirish va
-              telekommunikatsiyalar sohasida nazorat bo‘yicha davlat
-              inspeksiyasi
+              {{$t('logo.text')}}
             </p>
           </div>
         </div>
         <div class="footer__right">
-          <p>Xalq nazorati mobil ilovasini yuklab oling</p>
+          <p>{{$t('footer.text')}}</p>
           <div class="footer__img-wrapper">
             <div class="footer__right-img">
               <p>Xalq nazorati</p>
@@ -49,4 +47,9 @@
 export default {};
 </script>
 
-<style></style>
+<style scoped>
+  .container{
+    max-width: 1290px;
+    margin: 0 auto;
+  }
+</style>

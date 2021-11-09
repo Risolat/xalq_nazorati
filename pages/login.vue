@@ -1,11 +1,37 @@
 <template>
   <div class="container">
-    <form>
-      <p>Login</p>
-      <input v-model="form.email" type="email" placeholder="Email" />
-      <input v-model="form.password" type="password" placeholder="Password" />
-      <button @click="signIn()" type="button">Login</button>
-    </form>
+    <div class="login-form">
+      <p>{{$t('logo.signIn')}}</p>
+     <b-form>
+      <b-form-group id="input-group-1" :label="$t('auth.phone')" label-for="input-1">
+        <div class="phone-wrapper">
+        <span>+998</span>
+        <b-form-input
+          type="text"
+          id="input-1"
+          v-model="form.phone"
+          placeholder="__ ___ __ __"
+          required
+        ></b-form-input>
+        </div>
+      </b-form-group>
+
+      <b-form-group id="input-group-2" :label="$t('auth.password')" label-for="input-2">
+        <b-form-input
+          type="password"
+          id="input-2"
+          v-model="form.password"
+          :placeholder="$t('auth.password')"
+          required
+        ></b-form-input>
+      </b-form-group>
+      <nuxt-link :to="localePath('/forgetPassword')">Forget Password?</nuxt-link>
+      <button @click="signIn()" type="button">{{$t('auth.text')}}</button>
+     </b-form>
+     </div>
+    <div class="reg-box">
+      <nuxt-link :to="localePath('/reg')" >{{$t('auth.reg')}}</nuxt-link>
+    </div>
   </div>
 </template>
 
@@ -13,11 +39,8 @@
 export default {
   data() {
     return {
-      headers: {
-        "web-app-key": "xnazorat-79d1d41ae76d9543d29fca7270fbe69a-web"
-      },
       form: {
-        email: "",
+        phone: "",
         password: ""
       }
     };
@@ -25,18 +48,10 @@ export default {
   methods: {
     async signIn() {
       try {
-        console.log(this.form);
-        // const form_data = new FormData();
-        // form_data.append("passwrod", this.form.password);
-        // form_data.append("email", this.form.email);
-        // const ob = {
-        //     headers: { "Content-Type": "multipart/form-data" }
-        // }
-        let res = await this.$auth.loginWith("local", {headers: this.headers}, {data: this.form});
+        let res = await this.$auth.loginWith("local", {data: this.form});    
         console.log("Login", res);
-        this.$router.push("/");
+        this.$router.push(this.localePath({path: '/'}));
       } catch (err) {
-        console.log(this.form);
         console.log(err);
       }
     }

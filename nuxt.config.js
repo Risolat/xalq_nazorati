@@ -1,13 +1,15 @@
+import { i18N } from "./configurations/i18n";
+
 export default {
-  // Target (https://go.nuxtjs.dev/config-target)
   target: 'static',
   router: {
     base: '/'
   },
 
-  // Global page headers (https://go.nuxtjs.dev/config-head)
+
   head: {
     title: 'xalq',
+    
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -18,50 +20,52 @@ export default {
     ]
   },
 
-  // Global CSS (https://go.nuxtjs.dev/config-css)
   css: [
     { src: '@/assets/scss/main.scss', lang: 'scss' }
   ],
 
-  // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [
+   
   ],
 
-  // Auto import components (https://go.nuxtjs.dev/config-components)
   components: true,
 
-  // Modules for dev and build (recommended) (https://go.nuxtjs.dev/config-modules)
   buildModules: [
     '@nuxtjs/color-mode',
     '@nuxtjs/vuetify'
   ],
 
-  // Modules (https://go.nuxtjs.dev/config-modules)
   modules: [
-    // https://go.nuxtjs.dev/bootstrap
     'bootstrap-vue/nuxt',
     '@nuxtjs/axios',
     "@nuxtjs/auth",
-    // "@nuxtjs/auth-next"
-
+    [ "nuxt-i18n", i18N ],
+    'cookie-universal-nuxt',
   ],
   axios: {
     baseURL: 'https://xn.technocorp.uz/api',
-
+    headers: {
+      "web-app-key": "xnazorat-79d1d41ae76d9543d29fca7270fbe69a-web",
+    }
   },
 
   auth: {
     strategies: {
       local: {
         endpoints: {
-          login: { url: '/login', method: 'post', propertyName: 'access' },
+          login: { url: '/login', method: 'post', propertyName: 'token' },
+          user: {  url: '/user/me/', method: 'get', propertyName: false,
+            headers: {
+              "web-app-key": "xnazorat-79d1d41ae76d9543d29fca7270fbe69a-web"
+            }
+          },
           logout: false     
-        }   
+        },
+        tokenType: 'bearer'
       }
     },
   },  
 
-  // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {
   }
 }

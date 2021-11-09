@@ -1,15 +1,16 @@
 <template>
+
   <div class="landing">
+    
     <div class="container">
       <div class="hero">
         <div class="hero-left">
-          <h1 class="hero-left__title">Xalq nazorati</h1>
+          <h1 class="hero-left__title">{{$t('hero.title')}}</h1>
           <p class="hero-left__text">
-            Axborotlashtirish va telekommunikatsiyalar sohasida va
-            telekommunikatsiyalar sohasida telekommunikatsiyalar
+             {{$t('hero.text')}} 
           </p>
-          <nuxt-link class="hero-left__btn" to="#issue">
-            Murojaat yuborish
+          <nuxt-link class="hero-left__btn" to="#issues">
+            {{$t('hero.btn')}}
           </nuxt-link>
         </div>
         <div class="hero-right">
@@ -28,28 +29,28 @@
               <img src="../assets/img/stats1.svg" alt="stats" />
               <p class="stats__num">{{ stats.number_of_users }}</p>
             </div>
-            <p class="stats__text">Foydalanuvchilar</p>
+            <p class="stats__text">{{$t('stats.stats_item_1')}}</p>
           </li>
           <li class="stats__item">
             <div class="stats__img-wrapper">
               <img src="../assets/img/stats2.svg" alt="stats" />
               <p class="stats__num">{{ stats.number_of_tickets }}</p>
             </div>
-            <p class="stats__text">Tushgan murojaatlar</p>
+            <p class="stats__text">{{$t('stats.stats_item_2')}}</p>
           </li>
           <li class="stats__item">
             <div class="stats__img-wrapper">
               <img src="../assets/img/stats3.svg" alt="stats" />
               <p class="stats__num">{{ stats.number_of_completed_tickets}}</p>
             </div>
-            <p class="stats__text">Hal qilingan muammolar</p>
+            <p class="stats__text" id="issues">{{$t('stats.stats_item_3')}}</p>
           </li>
         </ul>
       </div>
     </div>
     <div class="issues">
     <div class="container">
-      <p class="issues__text">Muammoingizga tegishli bo’limni tangalng</p>
+      <p class="issues__text">{{$t('issues.text')}}</p>
       <div class="issues__container">
         <div class="issues__name">
           <div class="issues__select">
@@ -57,13 +58,14 @@
               class="select-wrapper"
               @click="areOptionsVisible = !areOptionsVisible"
             >
-              <p class="select">
-                {{ selected }}
+              <p class="select" v-if="selected === ''">
+                {{ $t('issues.defaultIssues') }}
               </p>
+              <p class="select" v-else>{{selected}}</p>
               <img src="../assets/img/select.svg" alt="select" />
             </div>
 
-            <div class="options" v-if="areOptionsVisible">
+            <div class="options">
               <p
                 class="option-text"
                 v-for="issue in issues"
@@ -71,7 +73,7 @@
                 :value="issue.name.oz"
                 @click="selectOption(issue)"
               >
-                {{ issue.name.uz }}
+                {{ issue.name[`${$i18n.locale}`] }}
               </p>
             </div>
           </div>
@@ -85,24 +87,24 @@
           >
             <nuxt-link
               class="issues__link"
-              :to="'/murojaatYuborish/' + item.id"
-              
-              >{{ item.name.uz }}</nuxt-link
-            >
+              :to="localePath('/murojaatYuborish/' + item.id)"
+              >{{ item.name[`${$i18n.locale}`] }}</nuxt-link>
           </li>
           <li class="issues__item" v-for="item in subIssues" :key="item.id">
             <nuxt-link
               class="issues__link"
-              :to="'/murojaatYuborish/' + item.id"
+              :to="localePath('/murojaatYuborish/' + item.id)"
+              @click="chooseRegion(item.id, )"
+              >
+                {{ item.name[`${$i18n.locale}`]}}
               
-              >{{ item.name.uz }}</nuxt-link
-            >
+              </nuxt-link>
+
           </li>
         </ul>
       </div>
     </div>
   </div>
-    <!-- <Issues id="issue" :referenceId="referenceId" /> -->
     <div class="steps">
       <img src="../assets/img/steps.svg" alt="step" />
     </div>
@@ -111,7 +113,7 @@
 </template>
 
 <script>
-import {mapState, mapGetters, mapActions, mapMutations } from 'vuex';
+import {mapState, mapActions } from 'vuex';
 
 export default {
   computed: mapState(['stats', 'issues']),
@@ -126,20 +128,19 @@ export default {
       issueName: "",
       issueId: "",
       array: [],
-      // issues: [],
       issueId: "",
       subIssues: [],
       subIssue: true,
       defaultSubIssues: [],
       areOptionsVisible: false,
-      selected: "Ma’lumotlar uzatish tizimlari",
+      selected: "",
       referenceId: null
     };
   },
   methods: {
     ...mapActions(['getStats', 'getIssues']),
     async getIssuesChild() {
-      await this.$axios(`/references/3/children`, { headers: this.headers })
+      await this.$axios(`/references/3/children`)
         .then(res => {
           console.log("asdf", res);
           this.defaultSubIssues = res.data;
@@ -152,8 +153,10 @@ export default {
       this.areOptionsVisible = false;
       this.selected = issue.name.oz;
       this.referenceId = issue.id;
-      localStorage.setItem("referenceId", this.referenceId);
-      await this.$axios(`/references/${this.referenceId}/children`, { headers: this.headers })
+      this.subIssue = true;      
+     // localStorage.setItem("referenceId", this.referenceId);
+
+      await this.$axios(`/references/${this.referenceId}/children`)
         .then(res => {
           console.log(res);
           this.subIssues = res.data;
@@ -166,16 +169,6 @@ export default {
     hideSelect() {
       this.areOptionsVisible = false;
     },
-    // async getIssues() {
-    //   await this.$axios("/references", { headers: this.headers })
-    //     .then(res => {
-    //       this.issues = res.data;
-    //       console.log(this.issues);
-    //     })
-    //     .catch(err => {
-    //       console.log(err);
-    //     });
-    // },
 
     scrollToBottom() {
       var rootElement = document.documentElement;
@@ -191,9 +184,8 @@ export default {
   },
   mounted() {
     this.getStats();
-    // this.getIssues();
   },
-    beforeDestroy() {
+  beforeDestroy() {
     document.removeEventListener("click", this.hideSelect);
   }
 };
@@ -202,5 +194,9 @@ export default {
 <style scoped>
 * {
   box-sizing: border-box;
+}
+.container{
+  max-width: 1290px;
+  margin: 0 auto;
 }
 </style>

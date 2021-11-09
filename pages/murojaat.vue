@@ -1,185 +1,127 @@
 <template>
   <div class="container">
     <div class="murojaat">
-      <h3 class="murojaat-text">Ma'lumotlarim</h3>
+      <h3 class="murojaat-text">{{$t('murojaat.myInfo')}}</h3>
       <ul class="murojaat-user-list">
         <li class="murojaat-user-item">
-          <p class="murojaat-user-blur">Familiya</p>
-          <p class="murojaat-user-text">Abduganiyev</p>
+          <p class="murojaat-user-blur">{{$t('murojaat.lastName')}}</p>
+          <p class="murojaat-user-text">{{user.last_name}}</p>
         </li>
         <li class="murojaat-user-item">
-          <p class="murojaat-user-blur">Ism</p>
-          <p class="murojaat-user-text">Sardor</p>
-        </li>
-        <li class="murojaat-user-item">
-          <p class="murojaat-user-blur">Sharifi</p>
-          <p class="murojaat-user-text">Shuxrat o’gli</p>
-        </li>
-        <li class="murojaat-user-item">
-          <p class="murojaat-user-blur">Manzil</p>
-          <p class="murojaat-user-text">
-            Chilonzor tumani. Alisher Navoiy ko’chasi 30
-          </p>
-        </li>
-        <li class="murojaat-user-item">
-          <p class="murojaat-user-blur">Pasport ma’lumotlari</p>
-          <p class="murojaat-user-text">AA523525698428</p>
-        </li>
-        <li class="murojaat-user-item">
-          <p class="murojaat-user-blur">Tug’ilgan kun</p>
-          <p class="murojaat-user-text">09/12/1996</p>
+          <p class="murojaat-user-blur">{{$t('murojaat.firstName')}}</p>
+          <p class="murojaat-user-text">{{user.first_name}}</p>
         </li>
       </ul>
       <div class="user-murojaats">
         <b-card no-body>
         <b-tabs pills card>
-          <b-tab title="Barchasi" active
+          <b-tab :title="$t('murojaatTable.allTickets')" active
             ><b-card-text>
               <div>
                 <table>
                   <tr>
                     <th>#</th>
-                    <th>Sana</th>
-                    <th>Muammo turi</th>
-                    <th>Muammo holati</th>
-                    <th>Batafsil</th>
+                    <th>{{$t('murojaatTable.date')}}</th>
+                    <th>{{$t('murojaatTable.issueType')}}</th>
+                    <th>{{$t('murojaatTable.issuePosition')}}</th>
+                    <th>{{$t('murojaatTable.more')}}</th>
                   </tr>
-                  <tr>
-                    <td>1</td>
-                    <td>26.01.2021</td>
-                    <td>Internet va IPTV xizmatiga ulanish bo'yicha</td>
+                  <tr v-for="(item, index) in myTickets" :key="index">
+                    <td>{{index + 1}}</td>
+                    <td>{{item.created_at.slice(0, 10)}}</td>
+                    <td>{{item.reference.name[`${$i18n.locale}`]}}</td>
                     <td>
                       <div class="murojaat-signal">
-                        <span class="murojaat-signal-yellow"></span>
-                        <p>Ijroga yuborildi</p>
+                        <span :class="{
+                          green: item.status === '5',
+                          blue: item.status === '1',
+                          orange: item.status === '2',
+                          yellow: item.status === '3'
+
+                        }"></span>
+                        <p v-show="item.status === '5'">Yakunlangan</p>
+                        <p v-show="item.status === '2'">Ijroga Yuborildi</p>
+                        <p v-show="item.status === '3'">Ijro qilinmoqda</p>
+                        <p v-show="item.status === '1'">Murojaat Yaratildi</p>
                       </div>
                     </td>
                     <td>
-                      <nuxt-link to="/batafsil" class="batafsil-link batafsil-link-active">
-                        Ko'rish
+                      <nuxt-link :to="'/batafsil/' + item.code" class="batafsil-link batafsil-link-active">
+                        {{$t('murojaatTable.button')}}
                       </nuxt-link>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>26.01.2021</td>
-                    <td>
-                      Veb-saytlar (domen nomlari, xosting va hokazolar) bo'yicha
-                    </td>
-                    <td>
-                      <div class="murojaat-signal">
-                        <span class="murojaat-signal-blue"></span>
-                        <p>Ijroga yuborildi</p>
-                      </div>
-                    </td>
-                    <td>
-                      <nuxt-link to="/batafsil" class="batafsil-link">Ko'rish</nuxt-link>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>3</td>
-                    <td>26.01.2021</td>
-                    <td>Internet va IPTV xizmatiga ulanish bo'yicha</td>
-                    <td>
-                      <div class="murojaat-signal">
-                        <span class="murojaat-signal-green"></span>
-                        <p>Ijroga yuborildi</p>
-                      </div>
-                    </td>
-                    <td>
-                      <nuxt-link to="/batafsil" class="batafsil-link">Ko'rish</nuxt-link>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>4</td>
-                    <td>26.01.2021</td>
-                    <td>
-                      Veb-saytlar (domen nomlari, xosting va hokazolar) bo'yicha
-                    </td>
-                    <td>
-                      <div class="murojaat-signal">
-                        <span class="murojaat-signal-yellow"></span>
-                        <p>Ijroga yuborildi</p>
-                      </div>
-                    </td>
-                    <td>
-                      <nuxt-link to="/batafsil" class="batafsil-link">Ko'rish</nuxt-link>
                     </td>
                   </tr>
                 </table>
               </div>
             </b-card-text></b-tab
           >
-          <b-tab title="Ijrodagi">
+          <b-tab :title="$t('murojaatTable.ticketsiNIjro')">
             <b-card-text>
               <div>
                 <table>
                   <tr>
                     <th>#</th>
-                    <th>Sana</th>
-                    <th>Muammo turi</th>
-                    <th>Muammo holati</th>
-                    <th>Batafsil</th>
+                    <th>{{$t('murojaatTable.date')}}</th>
+                    <th>{{$t('murojaatTable.issueType')}}</th>
+                    <th>{{$t('murojaatTable.issuePosition')}}</th>
+                    <th>{{$t('murojaatTable.more')}}</th>
                   </tr>
-                  <tr>
-                    <td>1</td>
-                    <td>26.01.2021</td>
-                    <td>Internet va IPTV xizmatiga ulanish bo'yicha</td>
+                  <tr v-for="(item, index) in myTickets" :key="index" v-show="item.status === '3'">
+                    <td>{{index + 1}}</td>
+                    <td>{{item.created_at.slice(0, 10)}}</td>
+                    <td>{{item.reference.name[`${$i18n.locale}`]}}</td>
                     <td>
                       <div class="murojaat-signal">
-                        <span class="murojaat-signal-yellow"></span>
-                        <p>Ijroga yuborildi</p>
+                        <span :class="{
+                          green: item.status === '5',
+                          blue: item.status === '1',
+
+                        }"></span>
+                        <p v-show="item.status === '5'">Yakunlangan</p>
+                        <p v-show="item.status === '1'">Murojaat Yaratildi</p>
+                        <p v-show="item.status === '2'">Ijroga Yuborildi</p>
                       </div>
                     </td>
                     <td>
-                      <nuxt-link to="/batafsil" class="batafsil-link">
+                      <nuxt-link :to="'/batafsil/' + item.code" class="batafsil-link batafsil-link-active">
                         Ko'rish
                       </nuxt-link>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>26.01.2021</td>
-                    <td>
-                      Veb-saytlar (domen nomlari, xosting va hokazolar) bo'yicha
-                    </td>
-                    <td>
-                      <div class="murojaat-signal">
-                        <span class="murojaat-signal-yellow"></span>
-                        <p>Ijroga yuborildi</p>
-                      </div>
-                    </td>
-                    <td>
-                      <nuxt-link to="/batafsil" class="batafsil-link">Ko'rish</nuxt-link>
                     </td>
                   </tr>
                 </table>
               </div>
             </b-card-text>
           </b-tab>
-          <b-tab title="Yakunlangan">
+          <b-tab :title="$t('murojaatTable.ticketsFinished')">
             <b-card-text>
               <div>
                 <table>
                   <tr>
-                    <th>#</th>
-                    <th>Sana</th>
-                    <th>Muammo turi</th>
-                    <th>Muammo holati</th>
-                    <th>Batafsil</th>
+                    <th>{{$t('murojaatTable.date')}}</th>
+                    <th>{{$t('murojaatTable.issueType')}}</th>
+                    <th>{{$t('murojaatTable.issuePosition')}}</th>
+                    <th>{{$t('murojaatTable.more')}}</th>
                   </tr>
-                  <tr>
-                    <td>1</td>
-                    <td>26.01.2021</td>
-                    <td>Internet va IPTV xizmatiga ulanish bo'yicha</td>
+                  <tr v-for="(item, index) in myTickets" :key="index" v-show="item.status === '5'">
+                    <td>{{index + 1}}</td>
+                    <td>{{item.created_at.slice(0, 10)}}</td>
+                    <td>{{item.reference.name[`${$i18n.locale}`]}}</td>
                     <td>
                       <div class="murojaat-signal">
-                        <span class="murojaat-signal-green"></span>
-                        <p>Ijroga yuborildi</p>
+                        <span :class="{
+                          green: item.status === '5',
+                          blue: item.status === '1',
+
+                        }"></span>
+                        <p v-show="item.status === '5'">Yakunlangan</p>
+                        <p v-show="item.status === '1'">Murojaat Yaratildi</p>
+                        <p v-show="item.status === '2'">Ijroga Yuborildi</p>
                       </div>
                     </td>
                     <td>
-                      <nuxt-link to="/batafsil" class="batafsil-link">Ko'rish</nuxt-link>
+                      <nuxt-link :to="localePath('/batafsil/' + item.code)" class="batafsil-link batafsil-link-active">
+                        Ko'rish
+                      </nuxt-link>
                     </td>
                   </tr>
                 </table>
@@ -194,11 +136,43 @@
 </template>
 
 <script>
+import {mapState, mapActions} from 'vuex';
 export default {
+  // middleware: 'authenticated',
+  computed: mapState(['user']),
   data() {
-    return {};
+    return {
+      myTickets: [],
+      first_name: '',
+      last_name: '',
+      address: '',
+    };
+  }, 
+  methods:{
+    ...mapActions(['getUser']),
+    async getMyTickets(){
+      await this.$axios('/my-tickets')
+        .then(res => {
+          console.log('qwerty', res)
+          this.myTickets = res.data.data;
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    }
+  },
+  created(){
+    this.getUser();
+  },
+  mounted(){
+    this.getMyTickets();
   }
 };
 </script>
 
-<style></style>
+<style scoped>
+.container{
+  max-width: 1290px;
+  margin: 0 auto;
+}
+</style>

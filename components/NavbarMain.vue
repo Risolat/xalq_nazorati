@@ -1,11 +1,11 @@
 <template>
   <div>
-    <div class="container">
-      <b-navbar fixed="top" toggleable="lg" type="dark" variant="info">
-        <nuxt-link to="/" class="logo">
+    <b-navbar fixed="top" toggleable="lg" type="dark" variant="info">
+      <div class="container">
+        <nuxt-link :to="localePath('/')" class="logo">
           <img
             class="navbar-gerb"
-            src="~/assets/img/gerb.svg"
+            src="~/assets/img/symbol.svg"
             alt="gerb"
             width="87"
             height="70"
@@ -17,10 +17,10 @@
             height="70"
           />
           <p class="navbar-title">
-            O‘zbekiston Respublikasi Axborotlashtirish va telekommunikatsiyalar
-            sohasida nazorat bo‘yicha davlat inspeksiyasi
+            {{ $t("logo.text") }}
           </p>
         </nuxt-link>
+
         <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
         <b-collapse id="nav-collapse" is-nav>
@@ -37,7 +37,8 @@
                 </div>
               </div>
             </b-nav-item>
-            <b-nav-item>
+
+            <b-nav-item v-show="$auth.loggedIn">
               <img
                 @click="showSms()"
                 src="~/assets/img/bell.svg"
@@ -53,8 +54,8 @@
               >
                 <div class="modal-content">
                   <ul class="sms-list">
-                    <li class="sms-item">
-                      <nuxt-link to="/" class="sms-link">
+                    <li class="sms-item" v-for="item in sms" :key="item.id">
+                      <nuxt-link :to="localePath('/murojaat')" class="sms-link">
                         <div class="sms-new">
                           <img
                             src="~/assets/img/circle.svg"
@@ -65,57 +66,20 @@
                         </div>
                         <div class="sms-text-wrapper">
                           <p class="sms-text">
-                            Internet va IPTV xizmatiga ulanish bo'yicha murojaat
-                            muvaffaqiyatli <span>Ijroga yuborildi</span>
+                            Murojaat {{ item.code }}
+                            <span v-show="item.status === '5'"
+                              >Yakunlangan</span
+                            >
+                            <span v-show="item.status === '2'"
+                              >Ijroga Yuborildi</span
+                            >
+                            <span v-show="item.status === '3'"
+                              >Ijro qilinmoqda</span
+                            >
+                            <span v-show="item.status === '1'"
+                              >Murojaat Yaratildi</span
+                            >
                           </p>
-                          <p class="sms-time">2 daqiqa oldin</p>
-                        </div>
-                      </nuxt-link>
-                    </li>
-                    <li class="sms-item">
-                      <nuxt-link to="/" class="sms-link">
-                        <div class="sms-new">
-                          <img
-                            src="~/assets/img/circle.svg"
-                            alt="circle"
-                            width="10"
-                            height="10"
-                          />
-                        </div>
-                        <div class="sms-text-wrapper">
-                          <p class="sms-text">
-                            Internet va IPTV xizmatiga ulanish bo'yicha murojaat
-                            muvaffaqiyatli <span>Ijro qilinmoqda</span>
-                          </p>
-                          <p class="sms-time">2 daqiqa oldin</p>
-                        </div>
-                      </nuxt-link>
-                    </li>
-                    <li class="sms-item">
-                      <nuxt-link to="/" class="sms-link">
-                        <div class="sms-new">
-                          <!-- <img src="~/assets/img/circle.svg" alt="circle" width="10" height="10"> -->
-                        </div>
-                        <div class="sms-text-wrapper">
-                          <p class="sms-text">
-                            Internet va IPTV xizmatiga ulanish bo'yicha murojaat
-                            muvaffaqiyatli <span>Ijro qilinmoqda</span>
-                          </p>
-                          <p class="sms-time">2 daqiqa oldin</p>
-                        </div>
-                      </nuxt-link>
-                    </li>
-                    <li class="sms-item">
-                      <nuxt-link to="/" class="sms-link">
-                        <div class="sms-new">
-                          <!-- <img src="~/assets/img/circle.svg" alt="circle" width="10" height="10"> -->
-                        </div>
-                        <div class="sms-text-wrapper">
-                          <p class="sms-text">
-                            Internet va IPTV xizmatiga ulanish bo'yicha murojaat
-                            muvaffaqiyatli <span>Yakunlandi</span>
-                          </p>
-                          <p class="sms-time">2 daqiqa oldin</p>
                         </div>
                       </nuxt-link>
                     </li>
@@ -123,6 +87,7 @@
                 </div>
               </div>
             </b-nav-item>
+
             <b-nav-item>
               <img
                 @click="showFont()"
@@ -131,18 +96,34 @@
                 alt="eye"
               />
 
-              <div :class="{ eye: isFont }" class="fontBox" v-if="!isFont" @click="hideFontModal()">
+              <div
+                :class="{ eye: isFont }"
+                class="fontBox"
+                v-if="!isFont"
+                @click="hideFontModal()"
+              >
                 <div class="modal-font">
                   <p class="fontBox-text">Ko’rinish</p>
                   <ul class="fontBox-list">
-                    <li class="fontBox-item font-blue">A</li>
-                    <li class="fontBox-item font-blur">A</li>
-                    <li class="fontBox-item font-brown">A</li>
+                    <li @click="defaultMode()" class="fontBox-item font-blue">
+                      A
+                    </li>
+                    <li
+                      @click="setWhiteGrayMode()"
+                      class="fontBox-item font-blur"
+                    >
+                      A
+                    </li>
+                    <li @click="setDarkMode()" class="fontBox-item font-brown">
+                      A
+                    </li>
                   </ul>
                   <p class="fontBox-text">Shrift o’lchami</p>
                   <ul class="fontBox-list">
                     <li class="fontBox-item font-small">F</li>
-                    <li class="fontBox-item font-big">F</li>
+                    <li class="fontBox-item font-big" @click="bigFontSize()">
+                      F
+                    </li>
                   </ul>
                   <button class="fontBox-reset">
                     Barcha sozlamalarni tiklash
@@ -150,35 +131,59 @@
                 </div>
               </div>
             </b-nav-item>
-            <b-nav-item-dropdown text="O'Z" right>
-              <b-dropdown-item href="#">уз</b-dropdown-item>
-              <b-dropdown-item href="#">ру</b-dropdown-item>
-            </b-nav-item-dropdown>
-            <b-nav-item>
-              <nuxt-link class="profile-button" to="/murojaat">
-                <img src="~/assets/img/profile.svg" alt="bell" />
-                <div class="profile">
-                  <p class="profile-name">Sardor</p>
-                  <p class="profile-surname">Abduganiyev</p>
-                </div>
-              </nuxt-link>
+
+            <b-nav-item right>
+              <v-select
+                @select="optionSelect"
+                :selected="selected"
+              />
             </b-nav-item>
-            <!-- <b-nav-item-dropdown right>
-              <template #button-content>
-                <em>User</em>
-              </template>
-              <b-dropdown-item href="#">Profile</b-dropdown-item>
-              <b-dropdown-item href="#">Sign Out</b-dropdown-item>
-            </b-nav-item-dropdown> -->
+
+            <li class="nav-item" v-if="$auth.loggedIn">
+              <b-dropdown class="dropdown">
+                <template class="profile" #button-content>
+                  <img src="~/assets/img/profile.svg" alt="bell" />
+
+                  <div class="profile">
+                    <div class="profile-name">{{ userName }}</div>
+                    <div class="profile-surname">{{ userLastName }}</div>
+                  </div>
+                </template>
+                <div
+                  class="d-flex justify-content-between align-items-center"
+                ></div>
+                <b-dropdown-item>
+                  <nuxt-link :to="localePath('/murojaat')"
+                    >Shaxsiy kabinet</nuxt-link
+                  >
+                </b-dropdown-item>
+                <b-dropdown-item>
+                  <nuxt-link :to="localePath('/paswordChange')"
+                    >Parolni o'zgartirish</nuxt-link
+                  >
+                </b-dropdown-item>
+
+                <b-dropdown-item @click="$auth.logout()">
+                  Chiqish</b-dropdown-item
+                >
+              </b-dropdown>
+            </li>
+
+            <b-nav-item v-else :to="localePath('/login')" class="navbar-button">
+              {{ $t("logo.signIn") }}
+            </b-nav-item>
           </b-navbar-nav>
         </b-collapse>
-      </b-navbar>
-    </div>
+      </div>
+    </b-navbar>
   </div>
 </template>
 
 <script>
+import VSelect from "./V-select.vue";
+
 export default {
+  components: { VSelect },
   props: {
     fixed: {
       type: String,
@@ -188,21 +193,121 @@ export default {
   data() {
     return {
       isHidden: true,
-      isFont: true
+      isFont: true,
+      isLang: true,
+      areOptionsVisible: false,
+      selected: "O'z",
+      userName: "",
+      userLastName: "",
+      user: [],
+      sms: []
     };
   },
   methods: {
+    optionSelect(option) {
+      this.selected = option;
+    },
+    async getUser() {
+      await this.$axios("user/me")
+        .then(res => {
+          // console.log("Login =====", res);
+          this.userName = res.data.data.first_name;
+          this.userLastName = res.data.data.last_name;
+          this.user = res.data.data;
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+
+    selectLangOption(lang) {
+      this.areOptionsVisible === false;
+      this.selected = lang;
+      console.log("Language", lang);
+    },
+
     showSms() {
       this.isHidden = !this.isHidden;
     },
+
     showFont() {
       this.isFont = !this.isFont;
+    },
+    showLang() {
+      this.isLang = !this.isLang;
     },
     hideWindow() {
       this.isHidden = true;
     },
-    hideFontModal(){
+    hideFontModal() {
       this.isFont = true;
+    },
+    hideLangModal() {
+      this.isLang = false;
+    },
+
+    setWhiteGrayMode() {
+      this.$cookies.set("theme-mode", "whiteGrayMode", {
+        path: "/",
+        maxAge: 60 * 60 * 24 * 7
+      });
+      this.whiteGrayMode();
+    },
+
+    whiteGrayMode() {
+      let wrap = document.querySelector("html");
+      wrap.classList += " whiteGrayMode";
+      wrap.classList.remove("darkMode");
+      this.$cookies.remove("darkMode");
+    },
+    setDarkMode() {
+      this.$cookies.set("theme-mode", "darkMode", {
+        path: "/",
+        maxAge: 60 * 60 * 24 * 7
+      });
+      this.darkMode();
+    },
+
+    darkMode() {
+      let darkTheme = document.querySelector("html");
+      darkTheme.classList += " darkMode";
+      darkTheme.classList.remove("whiteGrayMode");
+      this.$cookies.remove("whiteGrayMode");
+    },
+    defaultMode() {
+      this.$cookies.remove("whiteGrayMode");
+      this.$cookies.remove("darkMode");
+      let defaultMode = document.querySelector("html");
+      defaultMode.classList.remove("whiteGrayMode");
+      defaultMode.classList.remove("darkMode");
+    },
+    bigFontSize() {
+      let wrap = document.querySelector("html");
+      wrap.classList += " bigFontSize";
+    },
+    async getNotification() {
+      await this.$axios("/my-notifications")
+        .then(res => {
+          this.sms = res.data;
+          // console.log("Risolat Notification", res);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
+  },
+
+  created() {
+    this.getUser();
+    this.getNotification();
+  },
+
+  mounted() {
+    const cookieRes = this.$cookies.get("theme-mode");
+
+    switch (cookieRes) {
+      case "whiteGrayMode":
+        this.whiteGrayMode();
     }
   }
 };
@@ -210,11 +315,14 @@ export default {
 
 <style scoped>
 .container {
-  max-width: 1290px;
+  width: 1290px;
   margin: 0 auto;
 }
 
 .bg-info {
   background: linear-gradient(90.26deg, #b5c9ff 0%, #9fd1ff 99.43%);
+}
+.blur {
+  filter: grayscale(100%);
 }
 </style>

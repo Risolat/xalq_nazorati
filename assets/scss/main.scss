@@ -8,13 +8,17 @@
 // }
 $base-color: #020057;
 $bg-color: linear-gradient(90.26deg, #b5c9ff 0%, #9fd1ff 99.43%);
+
 *{
   font-family: 'Open Sans', 'Noto Sans', sans-serif;
 }
+
 html{
   scroll-behavior: smooth;
+  font-size: 16px;
 }
 
+@import "mixin";
 @import "components/footer";
 @import "components/navbar";
 @import "fonts";
@@ -23,4 +27,5 @@ html{
 @import "murojaatYuborish";
 @import "batafsil";
 @import "login";
+@import "specialVersion";
 

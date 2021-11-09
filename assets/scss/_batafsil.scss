@@ -11,14 +11,14 @@
   }
   .batafsil-list {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
     flex-wrap: wrap;
     list-style-type: none;
     padding: 0;
     padding-bottom: 50px;
     .batafsil-item {
-      width: 450px;
+      width: 400px;
       padding-bottom: 30px;
       .batafsil-blur {
         margin: 0;
@@ -31,8 +31,8 @@
       .batafsil-text {
         margin: 0;
         font-weight: 600;
-        font-size: 20px;
-        line-height: 27px;
+        font-size: 18px;
+        line-height: 25px;
         color: #131232;
       }
     }

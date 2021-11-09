@@ -19,7 +19,7 @@
     padding: 0;
     padding-bottom: 100px;
     .murojaat-user-item {
-      width: 450px;
+      width: 400px;
       padding-bottom: 30px;
       .murojaat-user-blur {
         margin: 0;
@@ -52,6 +52,7 @@
           line-height: 25px;
           margin-right: 20px;
           margin-left: 10px;
+          margin-bottom: 10px;
           border-radius: 30px;
         }
         .active {
@@ -89,6 +90,7 @@
           );
           border-radius: 10px;
           &:hover {
+            text-decoration: none;
             background: linear-gradient(
               337.23deg,
               #4d49ff 16.07%,
@@ -108,14 +110,17 @@
           border-radius: 30px;
           margin-right: 10px;
         }
-        .murojaat-signal-yellow {
+        .yellow {
           background-color: yellow;
         }
-        .murojaat-signal-blue {
+        .blue {
           background-color: #0095e9;
         }
-        .murojaat-signal-green {
+        .green {
           background-color: #23b000;
+        }
+        .orange{
+          background-color: orange;
         }
         p {
           margin: 0;
