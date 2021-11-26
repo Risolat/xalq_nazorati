@@ -55,15 +55,15 @@ export default {
     };
   },
   methods: {
-    async signIn() {
-      try {
-        let res = await this.$auth.loginWith("local", {data: this.form});    
-        console.log("Login", res);
-        this.$router.push(this.localePath({path: '/'}));
-      } catch (err) {
-        console.log(err);
-      }
-    },
+    // async signIn() {
+    //   try {
+    //     let res = await this.$auth.loginWith("local", {data: this.form});    
+    //     console.log("Login", res);
+    //     this.$router.push(this.localePath({path: '/'}));
+    //   } catch (err) {
+    //     console.log(err);
+    //   }
+    // },
     async postOneId(){
       await this.$axios.post(`https://sso.gov.uz:8443/sso/oauth/Authorization.do`, this.formData )
         .then(res => {
